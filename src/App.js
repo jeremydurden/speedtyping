@@ -3,19 +3,24 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
+  const STARTING_TIME = 5;
+
   const [data, setData] = useState({
     textarea: "",
     wordCount: 0,
   });
 
-  const [timeRemaining, setTimeRemaining] = useState(5);
+  const [timeRemaining, setTimeRemaining] = useState(STARTING_TIME);
   const [start, setStart] = useState(false);
+  const [retry, setRetry] = useState(false);
 
   useEffect(() => {
     if (timeRemaining > 0 && start) {
       setTimeout(() => {
         setTimeRemaining((prevState) => prevState - 1);
       }, 1000);
+    } else if (timeRemaining === 0) {
+      endGame();
     }
   }, [timeRemaining, start]);
 
@@ -29,7 +34,26 @@ function App() {
   const startGame = () => {
     if (!start) {
       setStart(true);
+      document.getElementById("textarea").focus();
     }
+  };
+
+  const endGame = () => {
+    setStart(false);
+    setRetry(true);
+    wordCounter(data.textarea);
+  };
+
+  const playAgain = () => {
+    setTimeRemaining(STARTING_TIME);
+    setData({
+      textarea: "",
+      wordCount: 0,
+    });
+    setStart(false);
+    setRetry(false);
+    startGame();
+    console.log("retry");
   };
 
   const wordCounter = (text) => {
@@ -50,10 +74,12 @@ function App() {
         rows="10"
         value={data.textarea}
         onChange={handleChange}
+        disabled={!start}
       />
       <h4>Time Left: {timeRemaining}</h4>
-      <button onClick={() => wordCounter(data.textarea)}>Count</button>
-      <button onClick={startGame}>Start</button>
+      <button onClick={retry ? playAgain : startGame}>
+        {retry ? "Retry" : "Start"}
+      </button>
       <h1>Word Count: {data.wordCount}</h1>
     </div>
   );
