@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function App() {
   const STARTING_TIME = 5;
@@ -13,6 +13,7 @@ function App() {
   const [timeRemaining, setTimeRemaining] = useState(STARTING_TIME);
   const [start, setStart] = useState(false);
   const [retry, setRetry] = useState(false);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (timeRemaining > 0 && start) {
@@ -34,7 +35,8 @@ function App() {
   const startGame = () => {
     if (!start) {
       setStart(true);
-      document.getElementById("textarea").focus();
+      inputRef.current.disabled = false;
+      inputRef.current.focus();
     }
   };
 
@@ -74,6 +76,7 @@ function App() {
         rows="10"
         value={data.textarea}
         onChange={handleChange}
+        ref={inputRef}
         disabled={!start}
       />
       <h4>Time Left: {timeRemaining}</h4>
