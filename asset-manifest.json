@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/speedtyping/static/css/main.42b4cf2f.css",
+    "main.js": "/speedtyping/static/js/main.fa05f5e9.js",
+    "index.html": "/speedtyping/index.html",
+    "main.42b4cf2f.css.map": "/speedtyping/static/css/main.42b4cf2f.css.map",
+    "main.fa05f5e9.js.map": "/speedtyping/static/js/main.fa05f5e9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.42b4cf2f.css",
+    "static/js/main.fa05f5e9.js"
+  ]
+}
