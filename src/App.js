@@ -12,7 +12,7 @@ function App() {
     wordCount,
     playAgain,
     startGame,
-  ] = useWordGame(5);
+  ] = useWordGame(20);
 
   return (
     <div className="App">
